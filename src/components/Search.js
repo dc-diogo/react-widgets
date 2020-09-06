@@ -18,7 +18,7 @@ const Search = () => {
       });
       setResults(data.query.search);
     };
-    searchWiki();
+    if (term) searchWiki();
   }, [term]);
 
   const renderedResults = results.map((result) => {
