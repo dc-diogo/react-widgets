@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Search = () => {
   const [term, setTerm] = useState('');
+
+  console.log('Rodo toda vez que renderiza...');
+
+  useEffect(() => {
+    console.log('Depois de toda renderezicao e depois da');
+  }, [term]);
 
   return (
     <div className="ui container">
