@@ -3,7 +3,17 @@ import axios from 'axios';
 
 const Search = () => {
   const [term, setTerm] = useState('programming');
+  const [debouncedTerm, setDebaouncedTerm] = useState(term);
   const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    const timeId = setTimeout(() => {
+      setDebaouncedTerm(term);
+    }, 1000);
+    return () => {
+      clearTimeout(timeId);
+    };
+  }, [term]);
 
   useEffect(() => {
     const searchWiki = async () => {
@@ -13,13 +23,13 @@ const Search = () => {
           list: 'search',
           origin: '*',
           format: 'json',
-          srsearch: term
+          srsearch: debouncedTerm
         }
       });
       setResults(data.query.search);
     };
-    if (term) searchWiki();
-  }, [term]);
+    searchWiki();
+  }, [debouncedTerm]);
 
   const renderedResults = results.map((result) => {
     // DO SOMETHING
