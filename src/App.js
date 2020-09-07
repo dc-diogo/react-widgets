@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Accordion from './components/Accordion';
 import Search from './components/Search';
 import Dropdown from './components/Dropdown';
@@ -34,14 +34,18 @@ const options = [
   }
 ];
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <Dropdown options={options} />
-      </div>
-    );
-  }
-}
+const App = () => {
+  const [selected, setSelected] = useState(options[0]);
+
+  return (
+    <div>
+      <Dropdown
+        selected={selected}
+        onSelectedChange={setSelected}
+        options={options}
+      />
+    </div>
+  );
+};
 
 export default App;
